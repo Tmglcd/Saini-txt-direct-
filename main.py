@@ -369,7 +369,7 @@ async def send_logs(client: Client, m: Message):  # Correct parameter name
 
 @bot.on_message(filters.command(["drm"]) )
 async def txt_handler(bot: Client, m: Message):  
-    editable = await m.reply_text(f"__Hii, I am non-drm Downloader Bot__\n\n<i>Send Me Your txt file or text which enclude Name with url...\nE.g: Name: Link</i>")
+    editable = await m.reply_text(f"__Hii, I am drm Downloader Bot__\n\n<i>Send Me Your txt file or text which enclude Name with url...\nE.g: Name: Link</i>")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
@@ -546,9 +546,7 @@ async def txt_handler(bot: Client, m: Message):
 
             if ".pdf*" in url:
                 url = f"https://dragoapi.vercel.app/pdf/{url}"
-            if ".zip" in url:
-                url = f"https://video.pablocoder.eu.org/appx-zip?url={url}"
-                
+            
             elif 'encrypted.m' in url:
                 appxkey = url.split('*')[1]
                 url = url.split('*')[0]
@@ -570,12 +568,12 @@ async def txt_handler(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:
-                cc = f'[🎥]Vid Id : {str(count).zfill(3)}\n**Video Title :** `{name1} [{res}p] .mkv`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
-                cc1 = f'[📕]Pdf Id : {str(count).zfill(3)}\n**File Title :** `{name1} .pdf`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
-                cczip = f'[📁]Zip Id : {str(count).zfill(3)}\n**Zip Title :** `{name1} .zip`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n' 
-                ccimg = f'[🖼️]Img Id : {str(count).zfill(3)}\n**Img Title :** `{name1} .jpg`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
-                ccm = f'[🎵]Audio Id : {str(count).zfill(3)}\n**Audio Title :** `{name1} .mp3`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
-                cchtml = f'[🌐]Html Id : {str(count).zfill(3)}\n**Html Title :** `{name1} .html`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
+                cc = f'[🎥]Vid Id : [{str(count).zfill(3)}]({link0})\n**Video Title :** `{name1} [{res}p] .mkv`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
+                cc1 = f'[📕]Pdf Id : [{str(count).zfill(3)}]({link0})\n**File Title :** `{name1} .pdf`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
+                cczip = f'[📁]Zip Id : [{str(count).zfill(3)}]({link0})\n**Zip Title :** `{name1} .zip`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n' 
+                ccimg = f'[🖼️]Img Id : [{str(count).zfill(3)}]({link0})\n**Img Title :** `{name1} .jpg`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
+                ccm = f'[🎵]Audio Id : [{str(count).zfill(3)}]({link0})\n**Audio Title :** `{name1} .mp3`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
+                cchtml = f'[🌐]Html Id : [{str(count).zfill(3)}]({link0})\n**Html Title :** `{name1} .html`\n<pre><code>**Batch Name :** {b_name}</code></pre>\n\n**Extracted by➤**`{CR}`\n'
                   
                 if "drive" in url:
                     try:
