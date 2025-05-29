@@ -417,7 +417,7 @@ async def txt_handler(bot: Client, m: Message):
     input1: Message = await bot.listen(editable.chat.id)
     raw_text0 = input1.text
     await input1.delete(True)
-    if raw_text0 == 'd':
+    if raw_text0 == '/d':
         b_name = file_name.replace('_', ' ')
     else:
         b_name = raw_text0
@@ -449,7 +449,7 @@ async def txt_handler(bot: Client, m: Message):
     input3: Message = await bot.listen(editable.chat.id)
     raw_text3 = input3.text
     await input3.delete(True)
-    if raw_text3 == '1':
+    if raw_text3 == '/d':
         CR = f"{CREDIT}"
     else:
         CR = raw_text3
