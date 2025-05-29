@@ -1,4 +1,4 @@
-import os
+noimport os
 import re
 import sys
 import m3u8
@@ -362,7 +362,7 @@ async def start(bot, m: Message):
 async def id_command(client, message: Message):
     chat_id = message.chat.id
     await message.reply_text(
-        f" 🎉 Welcome {m.from_user.first_name} to DRM Bot! 🎉\n\n"
+        f" 🎉 Welcome {message.from_user.first_name} to DRM Bot! 🎉\n\n"
            f"You can have access to download all Non-DRM+AES Encrypted URLs 🔐 including\n\n"
            f"Use Command : /help to get started 🌟\n\n"
            f"• 📚 Appx Zip+Encrypted Url\n"
