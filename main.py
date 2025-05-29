@@ -718,7 +718,7 @@ async def txt_handler(bot: Client, m: Message):
         await m.reply_text(e)
         time.sleep(2)
 
-    success_count = end - failed_count
+    success_count = len(links) - failed_count
     if raw_text7 == "/d":
         await bot.send_message(channel_id, f"-┈━═.•°✅ Completed ✅°•.═━┈-\n\n**🎯Batch Name : {b_name}**\n🔗 Total URLs: {len(links)} \n┃   ┠🔴 Total Failed URLs: {failed_count}\n┃   ┠🟢 Total Successful URLs: {success_count}\n┃   ┃   ┠🎥 Total Video URLs: {other_count}\n┃   ┃   ┠📄 Total PDF URLs: {pdf_count}\n┃   ┃   ┠📸 Total IMAGE URLs: {img_count}\n")
     else:
