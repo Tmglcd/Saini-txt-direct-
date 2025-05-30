@@ -527,15 +527,17 @@ async def txt_handler(bot: Client, m: Message):
     except Exception:
             res = "UN"
 
-    await editable.edit("__Enter Your Channel Name or Owner Name__\n__Send /d for use default__")
+    await editable.edit("__Enter the credit name for the caption. If you want both a permanent credit in the caption and the file name, separate them with a comma (,). or you want default then send /d__\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>")
     input3: Message = await bot.listen(editable.chat.id)
     raw_text3 = input3.text
     await input3.delete(True)
     if raw_text3 == '/d':
         CR = f"{CREDIT}"
+    elif "," in raw_text3:
+        CR, PRENAME = raw_text3.split(",")
     else:
         CR = raw_text3
-
+        
     await editable.edit("🔹Enter Your PW Token For 𝐌𝐏𝐃 𝐔𝐑𝐋\n🔹Send /anything for use default")
     input4: Message = await bot.listen(editable.chat.id)
     raw_text4 = input4.text
@@ -585,7 +587,10 @@ async def txt_handler(bot: Client, m: Message):
             link0 = "https://" + Vxy
 
             name1 = links[i][0].replace("(", "[").replace(")", "]").replace("_", "").replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
-            name = f'{name1[:60]}'
+            if "," in raw_text3:
+                 name = f'{PRENAME} {name1[:60]}'
+            else:
+                 name = f'{name1[:60]}'
             
             if "visionias" in url:
                 async with ClientSession() as session:
@@ -902,27 +907,14 @@ async def text_handler(bot: Client, m: Message):
                 url   = response.json()['url']
 
             elif "childId" in url and "parentId" in url:
-                url = f"https://pwplayer-38c1ae95b681.herokuapp.com/pw?url={url}&token={raw_text4}"
+                url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={raw_text4}"
                            
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
-                vid_id =  url.split('/')[-2]
-                #url = f"https://pwplayer-38c1ae95b681.herokuapp.com/pw?url={url}&token={raw_text4}"
                 url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={raw_text4}"
-                #url =  f"{api_url}pw-dl?url={url}&token={raw_text4}&authorization={api_token}&q={raw_text2}"
-                #url = f"https://dl.alphacbse.site/download/{vid_id}/master.m3u8"
-            
-            #elif '/master.mpd' in url:    
-                #headers = {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3NDYyODQwNTYuOTIsImRhdGEiOnsiX2lkIjoiNjdlYTcyYjZmODdlNTNjMWZlNzI5MTRlIiwidXNlcm5hbWUiOiI4MzQ5MjUwMTg1IiwiZmlyc3ROYW1lIjoiSGFycnkiLCJvcmdhbml6YXRpb24iOnsiX2lkIjoiNWViMzkzZWU5NWZhYjc0NjhhNzlkMTg5Iiwid2Vic2l0ZSI6InBoeXNpY3N3YWxsYWguY29tIiwibmFtZSI6IlBoeXNpY3N3YWxsYWgifSwicm9sZXMiOlsiNWIyN2JkOTY1ODQyZjk1MGE3NzhjNmVmIl0sImNvdW50cnlHcm91cCI6IklOIiwidHlwZSI6IlVTRVIifSwiaWF0IjoxNzQ1Njc5MjU2fQ.6WMjQPLUPW-fMCViXERGSqhpFZ-FyX-Vjig7L531Q6U", "client-type": "WEB", "randomId": "142d9660-50df-41c0-8fcb-060609777b03"}
-                #id =  url.split("/")[-2] 
-                #policy = requests.post('https://api.penpencil.xyz/v1/files/get-signed-cookie', headers=headers, json={'url': f"https://d1d34p8vz63oiq.cloudfront.net/" + id + "/master.mpd"}).json()['data']
-                #url = "https://sr-get-video-quality.selav29696.workers.dev/?Vurl=" + "https://d1d34p8vz63oiq.cloudfront.net/" + id + f"/hls/{raw_text2}/main.m3u8" + policy
-                #print(url)
 
             if ".pdf*" in url:
                 url = f"https://dragoapi.vercel.app/pdf/{url}"
-            if ".zip" in url:
-                url = f"https://video.pablocoder.eu.org/appx-zip?url={url}"
-                
+            
             elif 'encrypted.m' in url:
                 appxkey = url.split('*')[1]
                 url = url.split('*')[0]
@@ -1032,19 +1024,6 @@ async def text_handler(bot: Client, m: Message):
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         pass    
-
-                elif any(ext in url for ext in [".mp3", ".wav", ".m4a"]):
-                    try:
-                        ext = url.split('.')[-1]
-                        cmd = f'yt-dlp -x --audio-format {ext} -o "{name}.{ext}" "{url}"'
-                        download_cmd = f"{cmd} -R 25 --fragment-retries 25"
-                        os.system(download_cmd)
-                        await bot.send_document(chat_id=m.chat.id, document=f'{name}.{ext}', caption=cc1)
-                        os.remove(f'{name}.{ext}')
-                    except FloodWait as e:
-                        await m.reply_text(str(e))
-                        time.sleep(e.x)
-                        pass
 
                 elif any(ext in url for ext in [".jpg", ".jpeg", ".png"]):
                     try:
