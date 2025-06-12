@@ -675,7 +675,7 @@ async def txt_handler(bot: Client, m: Message):
     else:
         thumb = raw_text6
     await editable.delete()
-    await m.reply(f"<blockquote><b>🎯Target Batch : {b_name}</b></blockquote>")
+    await m.reply_text(f"<blockquote><b>🎯Target Batch : {b_name}</b></blockquote>")
 
     failed_count = 0
     count =int(raw_text)    
@@ -900,7 +900,7 @@ async def txt_handler(bot: Client, m: Message):
                            f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" \
                            f"🛑**Send** /stop **to stop process**\n┃\n" \
                            f"╰━✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ {CREDIT}"
-                    prog = await m.reply_text(Show, disable_web_page_preview=True)
+                    prog = await m.reply(Show, disable_web_page_preview=True)
                     res_file = await helper.download_and_decrypt_video(url, cmd, name, appxkey)  
                     filename = res_file  
                     await emoji_message.delete()
@@ -929,7 +929,7 @@ async def txt_handler(bot: Client, m: Message):
                            f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" \
                            f"🛑**Send** /stop **to stop process**\n┃\n" \
                            f"╰━✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ {CREDIT}"
-                    prog = await m.reply_text(Show, disable_web_page_preview=True)
+                    prog = await m.reply(Show, disable_web_page_preview=True)
                     res_file = await helper.decrypt_and_merge_video(mpd, keys_string, path, name, raw_text2)
                     filename = res_file
                     await emoji_message.delete()
@@ -958,7 +958,7 @@ async def txt_handler(bot: Client, m: Message):
                            f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" \
                            f"🛑**Send** /stop **to stop process**\n┃\n" \
                            f"╰━✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ {CREDIT}"
-                    prog = await m.reply_text(Show, disable_web_page_preview=True)
+                    prog = await m.reply(Show, disable_web_page_preview=True)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
                     await emoji_message.delete()
