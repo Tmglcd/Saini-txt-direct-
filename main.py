@@ -662,23 +662,15 @@ async def txt_handler(bot: Client, m: Message):
     except asyncio.TimeoutError:
         raw_text4 = 'WOTKING_PW_TOKEN'
 
-    await editable.edit(f"**🔹Send the Video Thumb URL\n🔹You can direct upload thumb\n\n**🔹Please wait..5sec...⏳ for use default**")
+    await editable.edit(f"**🔹Send the Video Thumb URL\n🔹Please wait..5sec...⏳ for use default**")
     try:
         input6: Message = await bot.listen(editable.chat.id, timeout=5)
-        if input6.photo:
-            raw_text6 = input6.photo
-        elif input6.text:
-            raw_text6 = input6.text
-        else:
-            await m.reply_text(f"<blockquote><b>Send valid link or photo for video thumbnail</b></blockquote>")
-            return
+        raw_text6 = input6.text
         await input6.delete(True)
     except asyncio.TimeoutError:
         raw_text6 = '/d'
 
-    if raw_text6.photo:
-        thumb = await input6.download()  # Use the photo sent by the user
-    elif raw_text6.startswith("http://") or raw_text6.startswith("https://"):
+    if raw_text6.startswith("http://") or raw_text6.startswith("https://"):
         # If a URL is provided, download thumbnail from the URL
         getstatusoutput(f"wget '{raw_text6}' -O 'thumb.jpg'")
         thumb = "thumb.jpg"
