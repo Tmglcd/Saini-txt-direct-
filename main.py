@@ -666,7 +666,7 @@ async def txt_handler(bot: Client, m: Message):
     try:
         input6: Message = await bot.listen(editable.chat.id, timeout=5)
         if input6.photo:
-            raw_text6 = input6.text
+            raw_text6 = input6.photo
         elif input6.text:
             raw_text6 = input6.text
         else:
@@ -676,7 +676,7 @@ async def txt_handler(bot: Client, m: Message):
     except asyncio.TimeoutError:
         raw_text6 = '/d'
 
-    if input6.photo:
+    if raw_text6.photo:
         thumb = await input6.download()  # Use the photo sent by the user
     elif raw_text6.startswith("http://") or raw_text6.startswith("https://"):
         # If a URL is provided, download thumbnail from the URL
