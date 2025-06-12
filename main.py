@@ -423,7 +423,7 @@ async def yt2m_handler(bot: Client, m: Message):
     youtube_link = input.text.strip()
     await input.delete(True)
 
-    Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐔𝐑𝐋 »  {youtube_link}\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ 🇸‌🇦‌🇮‌🇳‌🇮‌🐦"
+    Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐔𝐑𝐋 »  {youtube_link}\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ {CREDIT}🐦"
     await editable.edit(Show, disable_web_page_preview=True)
     await asyncio.sleep(10)
 
@@ -510,7 +510,7 @@ async def txt_handler(client: Client, m: Message):
         f"➥ /start – Bot Status Check\n"
         f"➥ /drm – Extract from .txt (Auto)\n"
         f"➥ /y2t – YouTube → .txt Converter\n"  
-        f"➥ /y2m – YT .txt → .mp3 downloader\n"  
+        f"➥ /ytm – YT .txt → .mp3 downloader\n"  
         f"➥ /yt2m – YT link → .mp3 downloader\n"  
         f"➥ /t2t – Text → .txt Generator\n" 
         f"➥ /stop – Cancel Running Task\n"
@@ -604,7 +604,7 @@ async def txt_handler(bot: Client, m: Message):
     else:
         await input0.delete(True)
 
-    await editable.edit(f"**🔹Enter Batch Name**\n\n**🔹Please wait...10sec...⏳ for use**\n\n🔹𝐍𝐚𝐦𝐞 » __**{file_name}__**")
+    await editable.edit(f"**🔹Enter Batch Name**\n\n**🔹Please wait...10sec...⏳ for use**\n\n🔹**Name** » __**{file_name}__**")
     try:
         input1: Message = await bot.listen(editable.chat.id, timeout=10)
         raw_text0 = input1.text
@@ -641,7 +641,7 @@ async def txt_handler(bot: Client, m: Message):
     except Exception:
             res = "UN"
 
-    await editable.edit("**🔹Enter Your Name**\n\n**🔹Please wait..10sec...⏳ for use default**\n\n🔹𝐍𝐚𝐦𝐞 » __**{CREDIT}**__")
+    await editable.edit(f"**🔹Enter Your Name**\n\n**🔹Please wait..10sec...⏳ for use default**\n\n🔹**Credit** » __**{CREDIT}**__")
     try:
         input3: Message = await bot.listen(editable.chat.id, timeout=10)
         raw_text3 = input3.text
@@ -662,13 +662,19 @@ async def txt_handler(bot: Client, m: Message):
     except asyncio.TimeoutError:
         raw_text4 = 'WOTKING_PW_TOKEN'
 
-    await editable.edit(f"**🔹Send the Video Thumb URL\n🔹Send /d for use default\n\n🔹You can direct upload thumb\n🔹Send **No** for use default**\n\n**🔹Please wait..5sec...⏳ for use default**")
+    await editable.edit(f"**🔹Send the Video Thumb URL\n🔹You can direct upload thumb\n\n**🔹Please wait..5sec...⏳ for use default**")
     try:
         input6: Message = await bot.listen(editable.chat.id, timeout=5)
-        raw_text6 = input6.text
+        if input6.photo:
+            raw_text6 = input6.text
+        elif input6.text:
+            raw_text6 = input6.text
+        else:
+            await m.reply_text(f"<blockquote><b>Send valid link or photo for video thumbnail</b></blockquote>")
+            return
         await input6.delete(True)
     except asyncio.TimeoutError:
-        raw_text6 = 'no'
+        raw_text6 = '/d'
 
     if input6.photo:
         thumb = await input6.download()  # Use the photo sent by the user
