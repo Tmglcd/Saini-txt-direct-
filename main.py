@@ -594,7 +594,7 @@ async def txt_handler(bot: Client, m: Message):
     except asyncio.TimeoutError:
         raw_text = '1'
     
-    if int(raw_text.text) > len(links) :
+    if int(raw_text) > len(links) :
         await editable.edit(f"**🔹Enter number in range of Index**")
         processing_request = False  # Reset the processing flag
         await m.reply_text("**🔹Exiting Task......  **")
