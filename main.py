@@ -551,7 +551,7 @@ async def txt_handler(bot: Client, m: Message):
         #print(f"Channel ID not in CHANNELS_LIST", m.chat.id)
         #await m.reply_text(f"<blockquote>__**Oopss! You are not a Premium member** __\n__**PLEASE UPGRADE YOUR PLAN**__\n__**Send me your user id for authorization**__\n__**Your User id**__ - `{m.chat.id}`</blockquote>\n")
         #return
-    editable = await m.reply_text(f"`🔹Hi I am Poweful TXT Downloader📥 Bot.\n🔹Send me the txt file and wait.`")
+    editable = await m.reply_text(f"**🔹Hi I am Poweful TXT Downloader📥 Bot.\n🔹Send me the txt file and wait.**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await bot.send_document(OWNER, x)
@@ -588,9 +588,9 @@ async def txt_handler(bot: Client, m: Message):
         os.remove(x)
         return
     
-    await editable.edit(f"`🔹Total 🔗 links found are {len(links)}\n🔹Img : {img_count}  🔹PDF : {pdf_count}\n🔹ZIP : {zip_count}  🔹Other : {other_count}\n🔹Send From where you want to download\n\n🔹Please wait...5sec...⏳ for download from starting`")
+    await editable.edit(f"**🔹Total 🔗 links found are {len(links)}\n🔹Img : {img_count}  🔹PDF : {pdf_count}\n🔹ZIP : {zip_count}  🔹Other : {other_count}\n🔹Send From where you want to download. Initial is 1\n\n🔹Please wait...15sec...⏳ for download from starting**")
     try:
-        input0: Message = await bot.listen(editable.chat.id, timeout=5)
+        input0: Message = await bot.listen(editable.chat.id, timeout=15)
         raw_text = input0.text
         await input0.delete(True)
     except asyncio.TimeoutError:
@@ -602,21 +602,21 @@ async def txt_handler(bot: Client, m: Message):
         await m.reply_text("**🔹Exiting Task......  **")
         return
     
-    await editable.edit(f"`🔹Enter Batch Name\n🔹Please wait...7sec...⏳ for use\n🔹Name` » `{file_name}`")
+    await editable.edit(f"**🔹Enter Batch Name or send /d for use default**\n\n**🔹Please wait...30sec...⏳ for use**\n\n🔹**Name** » __**{file_name}__**")
     try:
-        input1: Message = await bot.listen(editable.chat.id, timeout=7)
+        input1: Message = await bot.listen(editable.chat.id, timeout=30)
         raw_text0 = input1.text
         await input1.delete(True)
     except asyncio.TimeoutError:
-        raw_text0 = '1'
+        raw_text0 = '/d'
     
-    if raw_text0 == '1':
+    if raw_text0 == '/d':
         b_name = file_name.replace('_', ' ')
     else:
         b_name = raw_text0
 
 
-    await editable.edit(f"**╭━━━━❰ᴇɴᴛᴇʀ ʀᴇꜱᴏʟᴜᴛɪᴏɴ❱━━➣ \n┣━━⪼ send `144`  for 144p\n┣━━⪼ send `240`  for 240p\n┣━━⪼ send `360`  for 360p\n┣━━⪼ send `480`  for 480p\n┣━━⪼ send `720`  for 720p\n┣━━⪼ send `1080` for 1080p\n╰━━⌈⚡[`🦋{CREDIT}🦋`]⚡⌋━━➣\n\n🔹Please wait...5sec...⏳ for 480p**")
+    await editable.edit(f"**╭━━━━❰ᴇɴᴛᴇʀ ʀᴇꜱᴏʟᴜᴛɪᴏɴ❱━━➣ \n┣━━⪼ send `144`  for 144p\n┣━━⪼ send `240`  for 240p\n┣━━⪼ send `360`  for 360p\n┣━━⪼ send `480`  for 480p\n┣━━⪼ send `720`  for 720p\n┣━━⪼ send `1080` for 1080p\n╰━━⌈⚡[`🦋{CREDIT}🦋`]⚡⌋━━➣\n\n🔹Please wait...10sec...⏳ for 480p**")
     try:
         input2: Message = await bot.listen(editable.chat.id, timeout=10)
         raw_text2 = input2.text
@@ -642,9 +642,9 @@ async def txt_handler(bot: Client, m: Message):
     except Exception:
             res = "UN"
 
-    await editable.edit(f"`🔹Enter Your Name\n🔹Please wait..10sec...⏳ for use default\n🔹Credit` » `{CREDIT}`")
+    await editable.edit(f"**🔹Enter Your Name or send /d for use default**\n\n**🔹Please wait..30sec...⏳ for use default**\n\n🔹**Credit** » __**{CREDIT}**__")
     try:
-        input3: Message = await bot.listen(editable.chat.id, timeout=10)
+        input3: Message = await bot.listen(editable.chat.id, timeout=30)
         raw_text3 = input3.text
         await input3.delete(True)
     except asyncio.TimeoutError:
@@ -655,17 +655,17 @@ async def txt_handler(bot: Client, m: Message):
     else:
         CR = raw_text3
 
-    await editable.edit("`🔹Enter Working Batch Token For 𝐌𝐏𝐃 𝐔𝐑𝐋\n🔹Please wait..5sec...⏳ for use default`")
+    await editable.edit("**🔹Enter Working **PW Token** For 𝐌𝐏𝐃 𝐔𝐑𝐋**\n**🔹Please wait..10sec...⏳ for use default**")
     try:
-        input4: Message = await bot.listen(editable.chat.id, timeout=5)
+        input4: Message = await bot.listen(editable.chat.id, timeout=10)
         raw_text4 = input4.text
         await input4.delete(True)
     except asyncio.TimeoutError:
         raw_text4 = 'WOTKING_PW_TOKEN'
 
-    await editable.edit(f"`🔹Send the Video Thumb URL\n🔹Please wait..5sec...⏳ for use default`")
+    await editable.edit(f"**🔹Send the Video Thumb URL or send /d for use default\n🔹Please wait..20sec...⏳ for use default**")
     try:
-        input6: Message = await bot.listen(editable.chat.id, timeout=5)
+        input6: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text6 = input6.text
         await input6.delete(True)
     except asyncio.TimeoutError:
@@ -715,20 +715,19 @@ async def txt_handler(bot: Client, m: Message):
                 keys_string = " ".join([f"--key {key}" for key in keys])
 
             elif "tencdn.classplusapp" in url:
-                headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{token_cp}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
-                params = {"url": f"{url}"}
+                headers = {'Host': 'api.classplusapp.com', 'x-access-token': f'{token_cp}', 'user-agent': 'Mobile-Android', 'app-version': '1.4.37.1', 'api-version': '18', 'device-id': '5d0d17ac8b3c9f51', 'device-details': '2848b866799971ca_2848b8667a33216c_SDK-30', 'accept-encoding': 'gzip'}
+                params = (('url', f'{url}'))
                 response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
                 url = response.json()['url']  
-           
-            elif 'videos.classplusapp' in url:
+
+            elif 'videos.classplusapp' in url or "tencdn.classplusapp" in url or "webvideos.classplusapp.com" in url:
                 url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': f'{token_cp}'}).json()['url']
             
             elif 'media-cdn.classplusapp.com' in url or 'media-cdn-alisg.classplusapp.com' in url or 'media-cdn-a.classplusapp.com' in url: 
-                headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{token_cp}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
-                params = {"url": f"{url}"}
-                response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
+                headers = { 'x-access-token': f'{token_cp}',"X-CDN-Tag": "empty"}
+                response = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers=headers)
                 url   = response.json()['url']
-            
+
             elif "childId" in url and "parentId" in url:
                 url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={raw_text4}"
                            
