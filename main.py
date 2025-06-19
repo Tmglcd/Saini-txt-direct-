@@ -693,9 +693,9 @@ async def txt_handler(bot: Client, m: Message):
             await bot.pin_chat_message(m.chat.id, batch_message.id)
             message_id = batch_message.id
             pinning_message_id = message_id + 1
-            await bot.delete_messages(channel_id, pinning_message_id)
+            await bot.delete_messages(m.chat.id, pinning_message_id)
     except Exception as e:
-        await m.reply_text(str(e))
+        None
     
     failed_count = 0
     count =int(raw_text)    
