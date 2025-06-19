@@ -686,16 +686,15 @@ async def txt_handler(bot: Client, m: Message):
     else:
         thumb = raw_text6
     await editable.delete()
-    
-    batch_msg = await m.reply_text(f"<blockquote><b>🎯Target Batch : {b_name}</b></blockquote>")
-    await m.chat.pin_message(batch_msg.message_id)
-    pinned = await m.chat.get_pinned_message()
-    if pinned and pinned.message_id != batch_msg.message_id:
-        try:
-            await pinned.delete()
-        except Exception as e:
-            print(f"Failed to delete pinned notification: {e}")
-           
+
+    try:
+        if raw_text == "1":
+            batch_message = await m.reply_text(f"<blockquote><b>🎯Target Batch : {b_name}</b></blockquote>")
+            await bot.pin_chat_message(m.chat.id, batch_message.id)
+            message_id = batch_message.id
+            pinning_message_id = message_id + 1
+            await bot.delete_messages(channel_id, pinning_message_id)
+
     failed_count = 0
     count =int(raw_text)    
     arg = int(raw_text)
@@ -745,6 +744,10 @@ async def txt_handler(bot: Client, m: Message):
                 response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
                 url   = response.json()['url']
 
+            if "edge.api.brightcove.com" in url:
+                bcov = f'bcov_auth={cwtoken}'
+                url = url.split("bcov_auth")[0]+bcov
+                
             elif "childId" in url and "parentId" in url:
                 url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={raw_text4}"
                            
@@ -753,9 +756,7 @@ async def txt_handler(bot: Client, m: Message):
 
             if ".pdf*" in url:
                 url = f"https://dragoapi.vercel.app/pdf/{url}"
-            if ".zip" in url:
-                url = f"https://video.pablocoder.eu.org/appx-zip?url={url}"
-                
+             
             elif 'encrypted.m' in url:
                 appxkey = url.split('*')[1]
                 url = url.split('*')[0]
