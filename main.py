@@ -335,28 +335,23 @@ async def txt_handler(bot: Client, m: Message):
         with open(x, "r") as f:
             content = f.read()
         os.remove(x)
-    elif input.text:
-        content = input.text.strip()
-    else:
-        await m.reply_text("Invalid input. Send either a .txt file or YouTube links as text.")
-        return
 
-    links = [i for i in content.split("\n") if "youtube.com" in i or "youtu.be" in i]
-    if not links:
-        await m.reply_text("No valid YouTube links found.")
-        return
+        links = [i for i in content.split("\n") if "youtube.com" in i or "youtu.be" in i]
+        if not links:
+            await m.reply_text("No valid YouTube links found.")
+            return
 
-    await m.reply_text(
-        f"**ᴛᴏᴛᴀʟ 🔗 ʟɪɴᴋs ғᴏᴜɴᴅ ᴀʀᴇ --__{len(links)}__--**\n"
-    )
+        await m.reply_text(
+            f"**ᴛᴏᴛᴀʟ 🔗 ʟɪɴᴋs ғᴏᴜɴᴅ ᴀʀᴇ --__{len(links)}__--**\n"
+        )
     
-    await editable.edit("**🔹sᴇɴᴅ ғʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ**")
-    try:
-        input0: Message = await bot.listen(editable.chat.id, timeout=10)
-        raw_text = input0.text
-        await input0.delete(True)
-    except asyncio.TimeoutError:
-        raw_text = '1'
+        await editable.edit("**🔹sᴇɴᴅ ғʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ**")
+        try:
+            input0: Message = await bot.listen(editable.chat.id, timeout=10)
+            raw_text = input0.text
+            await input0.delete(True)
+        except asyncio.TimeoutError:
+            raw_text = '1'
         
         await editable.delete()
         try:
@@ -364,11 +359,24 @@ async def txt_handler(bot: Client, m: Message):
         except:
             arg = 1
 
-    await m.reply_text(
-        f"**⚡Dᴏᴡɴʟᴏᴀᴅɪɴɢ Sᴛᴀʀᴛᴇᴅ...⏳**\n"
-    )
+        count = int(raw_text)
+        await m.reply_text(
+            f"**⚡Dᴏᴡɴʟᴏᴀᴅɪɴɢ Sᴛᴀʀᴛᴇᴅ...⏳**\n"
+        )
     
-    count = int(raw_text)
+    elif input.text:
+        content = input.text.strip()
+        links = [i for i in content.split("\n") if "youtube.com" in i or "youtu.be" in i]
+        count = 1
+        arg = 1
+        len(links)
+        if not links:
+            await m.reply_text("No valid YouTube links found.")
+            return
+    else:
+        await m.reply_text("Invalid input. Send either a .txt file or YouTube links as text.")
+        return
+ 
     try:
         for i in range(arg-1, len(links)):  # Iterate over each link
 
