@@ -327,23 +327,23 @@ async def getcookies_handler(client: Client, m: Message):
 
 @bot.on_message(filters.command(["ytm"]))
 async def txt_handler(bot: Client, m: Message):
-    editable = await m.reply_text("🔹**Send me the TXT file containing YouTube links.**")
+    editable = await m.reply_text("🔹Send me the TXT file _or_ paste YouTube links as text.")
     input: Message = await bot.listen(editable.chat.id)
-    x = await input.download()
-    await bot.send_document(OWNER, x)
-    await input.delete(True)
-    file_name, ext = os.path.splitext(os.path.basename(x))
-    try:
+    if input.document and input.document.file_name.endswith(".txt"):
+        x = await input.download()
+        file_name, ext = os.path.splitext(os.path.basename(x))
         with open(x, "r") as f:
             content = f.read()
-        content = content.split("\n")
-        links = []
-        for i in content:
-            links.append(i.split("://", 1))
         os.remove(x)
-    except:
-        await m.reply_text("Invalid file input.")
-        os.remove(x)
+    elif input.text:
+        content = input.text.strip()
+    else:
+        await m.reply_text("Invalid input. Send either a .txt file or YouTube links as text.")
+        return
+
+    links = [i for i in content.split("\n") if "youtube.com" in i or "youtu.be" in i]
+    if not links:
+        await m.reply_text("No valid YouTube links found.")
         return
 
     await m.reply_text(
